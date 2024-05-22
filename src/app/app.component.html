@@ -1,0 +1,44 @@
+<form>
+  <header class="header">
+    <span>Погода</span>
+    <button
+      mat-mini-fab
+      color="primary"
+      title="Добавить город"
+      (click)="openDialog()"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      title="Старт отслеживания текущей погоды"
+      (click)="startTimer()"
+    >
+      Старт
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      title="Стоп отслеживания погоды"
+      (click)="stopTimer()"
+    >
+      Стоп
+    </button>
+  </header>
+  <body class="body">
+    <ng-container *ngIf="dataSource$.getValue().length === 0">
+      <app-card [placeholder]="'Необходимо добавить город'"></app-card
+    ></ng-container>
+    <div *ngFor="let item of dataSource$ | async; let i = index">
+      <ng-container *ngIf="item?.name!.length > 0">
+        <app-card
+          [cityWeather]="item"
+          (onDeleteCard)="onDeleteCard($event)"
+          [placeholder]="''"
+        ></app-card>
+      </ng-container>
+    </div>
+  </body>
+  <footer class="footer"><span>Copyright© {{ date < 2024 ? date + '-' : '' }}2024</span></footer>
+</form>

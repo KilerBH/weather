@@ -1,0 +1,26 @@
+<div class="dialog">
+  <h2 mat-dialog-title>Поиск города</h2>
+  <mat-dialog-content>
+    <mat-form-field class="mat-form-field">
+      <input
+        type="text"
+        placeholder="Введите название города"
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let option of filteredOptions | async"
+          [value]="option.data.city"
+          (click)="selectedOption(option.data.city)"
+        >
+          {{ option.value }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions">
+    <button mat-button (click)="onNoClick()">закрыть</button>
+  </mat-dialog-actions>
+</div>

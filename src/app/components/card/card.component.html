@@ -1,0 +1,31 @@
+<div class="card">
+  <mat-card class="mat-card">
+    <div class="mat-card-placeholder">
+      <span *ngIf="placeholder !== ''">{{ placeholder }}</span>
+    </div>
+    <mat-card-content class="mat-card-content" *ngIf="placeholder === ''">
+      <h1>{{ _cityWeather!.name! }}</h1>
+      <h2>{{ _temp + " °C" }}</h2>
+      <span>{{ _cityWeather?.weather[0]?.description! }}</span>
+      <div class="mat-card-content-weather-icon">
+        <img
+          [src]="
+            'https://openweather.site/img/wn/' +
+            _cityWeather?.weather[0]?.icon! +
+            '.png'
+          "
+        />
+      </div> </mat-card-content
+    ><mat-card-actions class="mat-card-actions" *ngIf="placeholder === ''"
+      ><button
+        class="remove-btn"
+        mat-icon-button
+        color="warn"
+        title="Удалить карту"
+        (click)="delete(_cityWeather?.name!)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button></mat-card-actions
+    >
+  </mat-card>
+</div>
